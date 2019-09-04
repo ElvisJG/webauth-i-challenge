@@ -24,13 +24,44 @@ server.get('/api/users', restrict, (req, res) => {
 
 // Creates a user using the information sent inside the body of the request.
 // Hash the password before saving the user to the database.
-server.post('/api/register', (req, res) => {});
+server.post('/api/register', (req, res) => {
+  const user = req.body;
+  // Logging to see the password mutation with before BCRYPT
+  console.log('Password Before Encryption', user.password);
+  // Asynchronous hashing the password supplied by the user
+  user.password = bcrypt.hashSync(user.password, 12);
+  // Logging to see the password after the BCRYPT mutation
+  console.log('Password After Encryption', user.password);
+
+  Users.add(user)
+    .then(savedUser => {
+      res.status(201).json(savedUser);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
 
 // Use the credentials sent inside the body to authenticate the user.
 // On successful login, create a new session for the user and send back
 // a 'Logged in' message and a cookie that contains the user id.
 // If login fails, respond with the correct status code and the message: 'You shall not pass!'
-server.post('/api/login', (req, res) => {});
+server.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+
+  Users.findBy({ username })
+    .first()
+    .then(user => {
+      if (user && bcrypt.compareSync(password, user.password)) {
+        res.status(200).json({ message: `Welcome Back ${user.username}` });
+      } else {
+        res.status(401).json({ message: 'You shall not pass! 🧙‍' });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
 
 // Write a piece of global middleware that ensures a user is logged in when accessing any route prefixed
 // by /api/restricted/. For instance, /api/restricted/something, /api/restricted/other,
