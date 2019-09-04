@@ -7,7 +7,9 @@ module.exports = {
   findById
 };
 
-function find() {}
+function find() {
+  return db('users');
+}
 
 function findBy(filter) {}
 
