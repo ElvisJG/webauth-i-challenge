@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Cabin:600&display=swap");
+
+.login-component-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 550px;
+    width: 550px;
+    border-radius: 12px;
+    border: 2px solid white;
+    background: rgba(52, 195, 214, 0.4);
+    box-shadow: 2px 6px 8px 0 rgba(2, 18, 109, 0.35),
+        2px 6px 12px 0 rgba(0, 0, 0, 0.4);
+    font-family: 'Cabin',
+        sans-serif;
+
+    .login-component {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 1rem;
+
+        .logo {
+            width: 80%;
+            height: 30%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+
+            &>h3 {
+                color: white;
+                font-size: 2.5rem;
+                text-align: center;
+            }
+
+            &>input {
+                outline: none;
+                line-height: 2rem;
+                border-radius: 8px;
+                font-size: 2rem;
+                border-radius: 8px;
+                border: 2px solid white;
+                background-color: rgba(52, 195, 214, 0.5);
+                color: whitesmoke;
+                font-weight: bold;
+
+                &::placeholder {
+                    color: rgba(245, 245, 245, 0.5);
+                }
+            }
+
+            .signup {
+                font-size: 1.5rem;
+                color: white;
+                line-height: 2.5rem;
+                font-weight: bold;
+
+                .signup-link {
+                    margin-left: 0.5rem;
+                    text-decoration: none;
+                    color: rgb(52, 195, 214);
+                    font-weight: normal;
+                    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+                }
+            }
+        }
+    }
+}
